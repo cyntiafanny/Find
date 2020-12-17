@@ -1,0 +1,66 @@
+.pic-user {
+  width: 50%;
+  max-width: 150px;
+  height: 150px;
+  border-width: 0.5px;
+  margin: 0 auto !important;
+  position: center !important;
+}
+
+.profile-container {
+  margin: 30px;
+}
+
+.user-name-cont {
+  margin: 10px 0 5px !important;
+}
+
+.user-name {
+  font-size: 20px;
+}
+
+.bar-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.no-history-logo {
+  margin: 30px 0;
+  width: 100%;
+}
+
+.location-name {
+  font-size: 18px;
+  font-weight: bolder;
+  margin-left: 10px;
+  width: 80%
+}
+
+.location-container {
+  display: flex !important;
+  flex-direction: column !important;
+  margin-top: 5px;
+}
+
+.time-container{
+  margin-left: 10px;
+  margin-top: 0 !important;
+}
+
+.title {
+  display: flex;
+  flex-direction: row;
+}
+
+ion-toolbar {
+  --background: #abdee6 !important;
+  color: white !important;
+}
+
+.wrap-text {
+  width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

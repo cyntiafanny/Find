@@ -1,0 +1,38 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Friends</ion-title>
+        <ion-buttons slot="primary">
+            <ion-button routerLink="/tabs/tabs/friends/add-friends">
+                <ion-icon name="person-add-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-searchbar
+            #searchbar
+            (ionChange)="searchFriend(searchbar.value)"
+            search-icon="search"
+            class="ion-search"
+    >
+    </ion-searchbar>
+
+    <ion-list>
+        <ion-row *ngIf="filteredFriend.length<=0">
+            <ion-col size="1"></ion-col>
+            <ion-col size="10">
+                <img class="no-result-logo" src="assets/result.png" alt="no-result"/>
+            </ion-col>
+            <ion-col size="1"></ion-col>
+        </ion-row>
+        <ion-item (click)="onPress(friend.id, friend.name)" *ngFor="let friend of filteredFriend" class="friend">
+            <ion-avatar class="friend-logo">
+                <ion-img src="assets/user.png"></ion-img>
+            </ion-avatar>
+            <div>
+                <ion-text>{{friend.name}}</ion-text>
+            </div>
+        </ion-item>
+    </ion-list>
+</ion-content>

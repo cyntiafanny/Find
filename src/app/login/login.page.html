@@ -1,0 +1,32 @@
+<ion-content>
+    <ion-row>
+        <img class="logo" [src]="['assets/find.png']" alt="Find Logo"/>
+        <ion-row class="authentication-header">
+            <h3 class="text-title">Sign In</h3>
+        </ion-row>
+        <form [formGroup]="loginForm" (ngSubmit)="loginUser(loginForm.value)">
+            <ion-row>
+                <ion-item lines="none">
+                    <ion-label position="floating">E-mail</ion-label>
+                    <ion-input type="email" formControlName="login_email"></ion-input>
+                </ion-item>
+            </ion-row>
+            <ion-row>
+                <ion-item lines="none">
+                    <ion-label position="floating">Password</ion-label>
+                    <ion-input type="password" formControlName="login_password"></ion-input>
+                </ion-item>
+            </ion-row>
+            <div class="buttons">
+                <ion-button expand="full" fill="solid" type="submit" style="margin: 20px 0 10px">
+                    <ion-label>
+                        <ion-spinner *ngIf="loadingIn"></ion-spinner>
+                        <ion-text *ngIf="!loadingIn">Sign In</ion-text>
+                    </ion-label>
+                </ion-button>
+                <ion-text>Don't have an account? </ion-text>
+                <ion-text style="color: #3dc2ff" [routerLink]="['/register']"> Create an Account</ion-text>
+            </div>
+        </form>
+    </ion-row>
+</ion-content>

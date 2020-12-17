@@ -1,0 +1,38 @@
+<ion-content>
+    <ion-grid>
+        <form [formGroup]="signUpForm" (ngSubmit)="signUpUser(signUpForm.value)">
+            <img class="logo" [src]="['assets/find.png']" alt="Find Logo"/>
+            <ion-row class="authentication-header">
+                <h3 class="text-title">Create an Account</h3>
+            </ion-row>
+            <ion-row>
+                <ion-item>
+                    <ion-label position="floating">Full Name</ion-label>
+                    <ion-input type="text" formControlName="signup_full_name"></ion-input>
+                </ion-item>
+            </ion-row>
+            <ion-row>
+                <ion-item>
+                    <ion-label position="floating">E-mail</ion-label>
+                    <ion-input type="email" formControlName="signup_email"></ion-input>
+                </ion-item>
+            </ion-row>
+            <ion-row>
+                <ion-item>
+                    <ion-label position="floating">Password</ion-label>
+                    <ion-input type="password" formControlName="signup_password"></ion-input>
+                </ion-item>
+            </ion-row>
+            <div class="buttons">
+                <ion-button expand="full" fill="solid" type="submit" style="margin: 20px 0 10px">
+                    <ion-label>
+                        <ion-spinner *ngIf="loadingUp"></ion-spinner>
+                        <ion-text *ngIf="!loadingUp">Sign Up</ion-text>
+                    </ion-label>
+                </ion-button>
+                <ion-text>Already have an account?</ion-text>
+                <ion-text style="color: #3dc2ff" [routerLink]="['/login']">  Sign In</ion-text>
+            </div>
+        </form>
+    </ion-grid>
+</ion-content>

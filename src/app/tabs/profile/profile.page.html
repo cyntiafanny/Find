@@ -1,0 +1,91 @@
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-title>Profile</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div class="profile-container ion-text-center">
+        <ion-avatar class="pic-user">
+            <img src="assets/user.png" alt="avatar"/>
+        </ion-avatar>
+        <div class="user-name-cont">
+            <ion-text class="user-name">{{currentUser.name}}</ion-text>
+        </div>
+        <div>
+            <ion-text class="ion-text-md-center">00000020976</ion-text>
+        </div>
+        <div class="ion-padding-top">
+            <ion-button color="danger" (click)="logout()">
+                Sign Out
+            </ion-button>
+        </div>
+    </div>
+    <div class="ion-padding-horizontal">
+        <ion-item class="bar-container" (click)="tabOnClick('history')">
+            <ion-col size="11">
+                <ion-text>Location History</ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-icon class="arrow-icon"
+                          name="chevron-down-outline"
+                          *ngIf="!isHistoryOpen"
+                ></ion-icon>
+                <ion-icon class="arrow-icon"
+                          name="chevron-up-outline"
+                          *ngIf="isHistoryOpen"
+                ></ion-icon>
+            </ion-col>
+        </ion-item>
+        <div *ngIf="isHistoryOpen">
+            <ion-list>
+                <ion-row *ngIf="locationHistory.length <= 0">
+                    <ion-col size="0.5"></ion-col>
+                    <ion-col size="11">
+                        <img class="no-history-logo" src="assets/history.png" alt="no-history"/>
+                    </ion-col>
+                    <ion-col size="0.5"></ion-col>
+                </ion-row>
+                <div (click)="presentAlert(singleLocation.id)" *ngFor="let singleLocation of locationHistory" class="location-container ion-padding-start">
+                    <div class="title">
+                        <div>
+                            <ion-icon slot="start" name="location-outline" color="danger"></ion-icon>
+                        </div>
+                        <div class="location-name">
+                            <ion-text>{{singleLocation.name}}</ion-text>
+                        </div>
+                    </div>
+                    <ion-item lines="#ffffb5">
+                        <ion-text class="time-container">{{singleLocation.dateTime}}</ion-text>
+                    </ion-item>
+                </div>
+            </ion-list>
+        </div>
+    </div>
+    <div class="ion-padding-horizontal ion-padding-bottom">
+        <ion-item class="bar-container" (click)="tabOnClick('impression')">
+            <ion-col size="11">
+                <ion-text>My Impression</ion-text>
+            </ion-col>
+            <ion-col>
+                <ion-icon class="arrow-icon"
+                          name="chevron-down-outline"
+                          *ngIf="!isImpressionopen"
+                ></ion-icon>
+                <ion-icon class="arrow-icon"
+                          name="chevron-up-outline"
+                          *ngIf="isImpressionopen"
+                ></ion-icon>
+            </ion-col>
+        </ion-item>
+        <div *ngIf="isImpressionopen" class="ion-padding-horizontal">
+            <p>Pengalamanku selama satu semester ini cukup tertantang dengan mata kuliah Cross Platform ini.Dari yang
+                biasanya membuat program hanya untuk satu platform tertentu,
+                kali ini bisa dijalankan di multi platform. Sangat menarik. Selain itu, menambah pengetahuan juga untuk
+                menjadi bekal di dunia kerja selanjutnya. Aslabnya pun sangat baik
+                dan mau direpotin (as always hehe), cuma bedanya sekarang aku udah baca error loh hehe :p</p>
+            <p>Intinya, makasih banyak Ko James dan Ko Yehez! walau udah lulus, tapi masih mau berkontribusi banget buat
+                nge-aslabin kita :') Sukses selalu!♡</p>
+        </div>
+    </div>
+</ion-content>

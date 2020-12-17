@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref='/tabs/tabs/friends'></ion-back-button>
+    </ion-buttons>
+    <ion-title>Discover</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-searchbar
+          #searchbar
+          (ionChange)="search(searchbar.value)"
+          search-icon="search"
+          class="ion-search"
+          placeholder="Search by Name"
+  >
+  </ion-searchbar>
+  <ion-list>
+    <ion-row *ngIf="result.length<=0">
+      <ion-col size="1"></ion-col>
+      <ion-col size="10">
+        <img class="discover-logo" src="assets/discover.png" alt="discover"/>
+      </ion-col>
+      <ion-col size="1"></ion-col>
+    </ion-row>
+    <ion-item *ngFor="let res of result" class="friend">
+      <ion-avatar class="friend-logo">
+        <ion-img src="assets/user.png"></ion-img>
+      </ion-avatar>
+      <ion-col size="6">
+        <ion-text>{{res.name}}</ion-text>
+      </ion-col>
+      <ion-col size="2">
+        <ion-button (click)="addFriend(res.id, res.idx)" *ngIf="!res.status" color="primary">
+          <ion-icon name="person-add-outline"></ion-icon>
+        </ion-button>
+        <ion-button disabled *ngIf="res.status" color="success">
+          <ion-icon name="checkbox-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-item>
+  </ion-list>
+</ion-content>

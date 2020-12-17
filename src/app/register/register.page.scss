@@ -1,0 +1,52 @@
+ion-grid {
+  display: flex;
+  flex-direction: column;
+  //border: 1px solid blue;
+  height: auto;
+  padding: 0;
+}
+
+ion-row {
+  //border: 1px solid red;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+
+}
+
+ion-col {
+  //border: 1px solid green;
+  padding: 0;
+}
+
+.authentication-header {
+  justify-content: flex-start;
+  height: 40%;
+  margin-top: 0;
+  h1 {
+    font-weight: bold;
+    font-size: 2em;
+  }
+  .authentication-bubble {
+    height: 100%;
+  }
+}
+
+.buttons {
+  margin: 0 2em;
+}
+
+.logo{
+  width: 100%;
+  margin: 0 0 20px;
+  position: center;
+  max-width: 800px;
+  align-self: center;
+  max-height: 300px;
+  object-fit: cover;
+}
+
+.text-title {
+  margin: 0 40px!important;
+}
+

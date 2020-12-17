@@ -1,0 +1,42 @@
+#map {
+  height: 95%
+}
+
+ion-toolbar {
+  --background: #abdee6 !important;
+  color: white !important;
+}
+
+.location-container {
+  border-bottom-width: 1px;
+  border-color: #9d9fa6;
+  display: flex;
+  flex-direction: row;
+  margin: 10px 20px;
+}
+
+ion-label {
+  font-size: 12px !important;
+}
+
+.location-text {
+  font-size: 16px;
+  font-weight: bolder;
+}
+
+.location-container-text {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+}
+
+.button-container {
+  margin-left: 15px;
+}
+
+.wrap-text {
+  width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

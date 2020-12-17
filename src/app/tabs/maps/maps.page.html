@@ -1,0 +1,23 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Maps</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div class="location-container">
+        <div class="location-container-text">
+            <ion-label>Current Location</ion-label>
+            <ion-text class="location-text wrap-text">{{currentLocation}}</ion-text>
+        </div>
+        <div class="button-container">
+            <ion-button size="small" color="warning" (click)="checkIn()">Check In</ion-button>
+        </div>
+    </div>
+    <div #map id="map"></div>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button color="light" (click)="goToCenter()">
+            <ion-icon name="locate-outline"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+</ion-content>
