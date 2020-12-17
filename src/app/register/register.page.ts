@@ -26,7 +26,7 @@ export class RegisterPage implements OnInit {
     this.auth.onAuthStateChanged((user) => {
       if (user) {
         this.userService.setLoggedInUser(user.uid);
-        this.router.navigateByUrl('/welcome');
+        this.router.navigateByUrl('/tabs');
         this.currentUser = user;
       }
     });
@@ -53,7 +53,7 @@ export class RegisterPage implements OnInit {
       .then((userCredential) => {
           this.userService.setLoggedInUser(userCredential.user.uid);
           this.userService.create(userCredential.user, credentials.signup_full_name);
-          this.router.navigateByUrl('/tabs');
+          this.router.navigateByUrl('/welcome');
           this.loadingUp = false;
         },
         async error => {
