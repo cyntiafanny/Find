@@ -6,13 +6,13 @@
         </ion-row>
         <form [formGroup]="loginForm" (ngSubmit)="loginUser(loginForm.value)">
             <ion-row>
-                <ion-item lines="none">
+                <ion-item>
                     <ion-label position="floating">E-mail</ion-label>
                     <ion-input type="email" formControlName="login_email"></ion-input>
                 </ion-item>
             </ion-row>
             <ion-row>
-                <ion-item lines="none">
+                <ion-item>
                     <ion-label position="floating">Password</ion-label>
                     <ion-input type="password" formControlName="login_password"></ion-input>
                 </ion-item>
