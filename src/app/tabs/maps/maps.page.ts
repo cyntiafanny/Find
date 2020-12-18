@@ -38,11 +38,17 @@ export class MapsPage implements OnInit {
   }
 
   ngOnInit() {
+    this.auth.onAuthStateChanged((user) => {
+      if (!user) {
+        this.router.navigateByUrl('/login');
+        return;
+      }
+      else {
+        this.userService.setLoggedInUser(user.uid);
+        this.uid = user
+      }
+    });
     this.uid = this.userService.getLoggedInUser().id;
-    if (!this.uid) {
-      this.router.navigateByUrl('/login')
-      return;
-    }
 
     this.db.object('/location/' + this.uid).query.once('value')
       .then(data => {
