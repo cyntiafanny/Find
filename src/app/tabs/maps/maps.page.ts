@@ -151,13 +151,13 @@ export class MapsPage implements OnInit {
 
     this.automaticUpdate = setInterval(() => {
       navigator.geolocation.getCurrentPosition(() => {
-        this.goToCenter(true);
+        this.goToCenter();
         this.checkIn();
       })
     }, 600000);
   }
 
-  goToCenter(automated?: boolean) {
+  goToCenter() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position: Position) => {
           this.currentLatitude = position.coords.latitude
@@ -168,10 +168,8 @@ export class MapsPage implements OnInit {
             (data: any) => {
               this.currentLocation = data.results[0].formatted_address;
             })
-          if(!automated) {
             this.initMap();
             this.makeFriendsMark()
-          }
         })
       }
   }
