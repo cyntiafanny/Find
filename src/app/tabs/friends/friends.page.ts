@@ -43,7 +43,7 @@ export class FriendsPage implements OnInit {
               if(singleId !== '-') {
                 this.friends.push({
                   id: singleId,
-                  name: singleUser[4].toString()
+                  name: singleUser[1].toString()
                 })
               }
             })
