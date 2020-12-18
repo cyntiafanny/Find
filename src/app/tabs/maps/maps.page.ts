@@ -42,34 +42,37 @@ export class MapsPage implements OnInit {
       if (!user) {
         this.router.navigateByUrl('/login');
         return;
-      }
-      else {
+      } else {
         this.userService.setLoggedInUser(user.uid);
         this.uid = user.uid
+
+        this.db.object('/location/' + this.uid).query.once('value')
+          .then(data => {
+            let currId = "";
+            Object.keys(data.val()).forEach(locId => {
+              currId = locId;
+            });
+            if (currId === "-") {
+
+            }
+            if (currId !== "-") {
+              this.currentLongitude = data.val()[currId].longitude;
+              this.currentLatitude = data.val()[currId].latitude;
+              this.currentLocation = data.val()[currId].location;
+            }
+          }).then(() => this.initMap())
       }
     });
-    this.uid = this.userService.getLoggedInUser().id;
-
-    this.db.object('/location/' + this.uid).query.once('value')
-      .then(data => {
-        let currId = "";
-        Object.keys(data.val()).forEach(locId => {
-          currId = locId;
-        });
-        if(currId === "-") {
-
-        }
-        if (currId !== "-") {
-          this.currentLongitude = data.val()[currId].longitude;
-          this.currentLatitude = data.val()[currId].latitude;
-          this.currentLocation = data.val()[currId].location;
-        }
-      }).then(() => this.initMap())
   }
 
   ionViewWillEnter() {
-    this.initMap()
-    this.fetchFriendLocation()
+    this.auth.onAuthStateChanged((user) => {
+        if (user) {
+          this.initMap()
+          this.fetchFriendLocation()
+        }
+      }
+    )
   }
 
   fetchFriendLocation() {
@@ -94,7 +97,7 @@ export class MapsPage implements OnInit {
                     Object.keys(data.val()).forEach(locId => {
                       currId = locId;
                     });
-                   if (currId !== "-") {
+                    if (currId !== "-") {
                       this.friendsLocation.push({
                         id: currId,
                         user: singleUser[4].toString(),
@@ -133,27 +136,27 @@ export class MapsPage implements OnInit {
   }
 
   initMap() {
-      const location = new google.maps.LatLng(this.currentLatitude, this.currentLongitude);
-      const options = {
-        center: location,
-        zoom: 10,
-        disableDefaultUI: true
-      };
+    const location = new google.maps.LatLng(this.currentLatitude, this.currentLongitude);
+    const options = {
+      center: location,
+      zoom: 10,
+      disableDefaultUI: true
+    };
 
-      this.map = new google.maps.Map(this.mapRef.nativeElement, options);
+    this.map = new google.maps.Map(this.mapRef.nativeElement, options);
 
-      let marker = new google.maps.Marker({
-        position: options.center,
-        map: this.map,
-      });
+    let marker = new google.maps.Marker({
+      position: options.center,
+      map: this.map,
+    });
 
-      let content = "<h5><b>Your location</b></h5><p>" + this.currentLocation + "</p>"
-      let infoWindow = new google.maps.InfoWindow({
-        content: content
-      });
-      google.maps.event.addListener(marker, 'click', () => {
-        infoWindow.open(this.map, marker);
-      });
+    let content = "<h5><b>Your location</b></h5><p>" + this.currentLocation + "</p>"
+    let infoWindow = new google.maps.InfoWindow({
+      content: content
+    });
+    google.maps.event.addListener(marker, 'click', () => {
+      infoWindow.open(this.map, marker);
+    });
 
     this.automaticUpdate = setInterval(() => {
       navigator.geolocation.getCurrentPosition(() => {
@@ -165,19 +168,19 @@ export class MapsPage implements OnInit {
 
   goToCenter() {
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition((position: Position) => {
-          this.currentLatitude = position.coords.latitude
-          this.currentLongitude = position.coords.longitude
+      navigator.geolocation.getCurrentPosition((position: Position) => {
+        this.currentLatitude = position.coords.latitude
+        this.currentLongitude = position.coords.longitude
 
-          let url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + this.currentLatitude + "," + this.currentLongitude + "&key=AIzaSyDehuZ6WNyD6N-U9FT3R7ckDTQdQgK4JCE"
-          this.http.get(url).subscribe(
-            (data: any) => {
-              this.currentLocation = data.results[0].formatted_address;
-            })
-            this.initMap();
-            this.makeFriendsMark()
-        })
-      }
+        let url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + this.currentLatitude + "," + this.currentLongitude + "&key=AIzaSyDehuZ6WNyD6N-U9FT3R7ckDTQdQgK4JCE"
+        this.http.get(url).subscribe(
+          (data: any) => {
+            this.currentLocation = data.results[0].formatted_address;
+          })
+        this.initMap();
+        this.makeFriendsMark()
+      })
+    }
   }
 
   formatDate() {
