@@ -68,6 +68,7 @@ export class MapsPage implements OnInit {
   ionViewWillEnter() {
     this.auth.onAuthStateChanged((user) => {
         if (user) {
+          this.userService.setLoggedInUser(user.uid);
           this.initMap()
           this.fetchFriendLocation()
         }
@@ -100,7 +101,7 @@ export class MapsPage implements OnInit {
                     if (currId !== "-") {
                       this.friendsLocation.push({
                         id: currId,
-                        user: singleUser[2].toString(),
+                        user: singleUser[1].toString(),
                         longitude: data.val()[currId].longitude,
                         latitude: data.val()[currId].latitude,
                         name: data.val()[currId].location,

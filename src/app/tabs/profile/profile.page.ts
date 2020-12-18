@@ -34,6 +34,7 @@ export class ProfilePage implements OnInit {
   }
 
   ionViewWillEnter() {
+    this.currentUser = this.userService.getLoggedInUser();
     this.isImpressionopen = false;
     this.isHistoryOpen = false;
     this.fetchHistory()
