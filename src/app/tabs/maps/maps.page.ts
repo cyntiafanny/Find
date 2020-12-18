@@ -100,7 +100,7 @@ export class MapsPage implements OnInit {
                     if (currId !== "-") {
                       this.friendsLocation.push({
                         id: currId,
-                        user: singleUser[4].toString(),
+                        user: singleUser[2].toString(),
                         longitude: data.val()[currId].longitude,
                         latitude: data.val()[currId].latitude,
                         name: data.val()[currId].location,
