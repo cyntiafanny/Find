@@ -45,7 +45,7 @@ export class MapsPage implements OnInit {
       }
       else {
         this.userService.setLoggedInUser(user.uid);
-        this.uid = user
+        this.uid = user.uid
       }
     });
     this.uid = this.userService.getLoggedInUser().id;
